@@ -1,0 +1,76 @@
+<div class="container py-5" style="max-width: 500px;">
+  <h2 class="text-center mb-5">Create Account</h2>
+  <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name" placeholder="Enter your name">
+      <div *ngIf="regForm.get('name')?.touched && regForm.get('name')?.invalid" class="text-danger mt-1">
+        <div *ngIf="regForm.get('name')?.errors?.['required']">Name is required</div>
+        <div *ngIf="regForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Enter your email">
+      <div *ngIf="regForm.get('email')?.touched && regForm.get('email')?.invalid" class="text-danger mt-1">
+        <div *ngIf="regForm.get('email')?.errors?.['required']">Email is required</div>
+        <div *ngIf="regForm.get('email')?.errors?.['email']">Enter a valid email</div>
+      </div>
+    </div>
+
+    <!-- Phones -->
+    <div formArrayName="phones" class="mb-3">
+      <div *ngFor="let phoneCtrl of phones.controls; let i = index" class="d-flex align-items-center mb-2">
+        <input type="text" class="form-control me-2" [formControlName]="i" placeholder="010XXXXXXXX">
+        <button type="button" class="btn btn-danger" (click)="removePhone(i)" *ngIf="phones.length > 1">Remove</button>
+      </div>
+
+      <div *ngIf="phones.errors?.['invalidPhone'] && phones.touched" class="text-danger mb-1">
+        All phone numbers must start with 010/011/012/015 and have 11 digits
+      </div>
+
+      <div *ngIf="phones.errors?.['minOnePhone'] && phones.touched" class="text-danger mb-1">
+        At least one phone number is required
+      </div>
+
+      <div class="text-center m-auto">
+        <button type="button" class="btn btn-dark" (click)="addPhone()">Add Mobile Number</button>
+      </div>
+    </div>
+
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="Password">
+      <div *ngIf="regForm.get('password')?.touched && regForm.get('password')?.invalid" class="text-danger mt-1">
+        <div *ngIf="regForm.get('password')?.errors?.['required']">Password is required</div>
+        <div *ngIf="regForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+        <div *ngIf="regForm.get('password')?.errors?.['pattern']">Password must include letters, numbers & special chars
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+      <div *ngIf="regForm.get('confirmPassword')?.touched && regForm.hasError('mismatch')" class="text-danger mt-1">
+        Passwords do not match
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="error" class="text-danger mb-2">{{ error }}</div>
+
+    <button type="submit" class="btn btn-dark w-100">Register</button>
+  </form>
+
+  <p class="mt-3 text-center">
+    Already have an account? <a [routerLink]="['/login']">Login here</a>
+  </p>
+</div>

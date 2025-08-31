@@ -1,0 +1,29 @@
+.contact .row {
+  width: 50%;
+  margin: auto;
+}
+
+.contact .row form {
+  text-align: center;
+}
+
+.contact .row form .inputBox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.contact .row form .inputBox input {
+  width: 100%;
+  text-transform: none;
+  background: none;
+  outline: 0;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+}
+
+.contact .row form .inputBox input::placeholder {
+  color: #aaa;
+  font-size: 1rem;
+  text-transform: capitalize;
+}

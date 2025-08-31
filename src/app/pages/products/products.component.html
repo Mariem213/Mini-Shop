@@ -1,0 +1,35 @@
+<div class="container py-4">
+  <h2 class="mb-5">All Products</h2>
+  <div class="d-flex mb-3">
+    <input class="form-control me-2" placeholder="Search products..." (input)="onSearch($event)">
+  </div>
+
+  <div class="row g-3 mt-3">
+    <div class="col-md-4" *ngFor="let p of filtered">
+      <app-product-card [product]="p" (add)="onAdd(p)" (showDetails)="openDetails(p)">
+      </app-product-card>
+    </div>
+  </div>
+</div>
+
+<!-- نفس الـ Modal من Home -->
+<div class="modal fade" id="productModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedProduct?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedProduct">
+        <img *ngIf="selectedProduct.img" [src]="selectedProduct.img" class="img-fluid mb-3">
+        <p><strong>Price:</strong> \${{ selectedProduct.price }}</p>
+        <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+        <p *ngIf="selectedProduct.category"><strong>Category:</strong> {{ selectedProduct.category }}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="onAdd(selectedProduct!)">Add to Cart</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

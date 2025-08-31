@@ -1,0 +1,17 @@
+.btn-outline-primary {
+  color: #000;
+  border-color: #eee;
+}
+.btn-outline-primary:hover {
+  background-color: #000;
+  color: white;
+}
+
+a.active {
+  font-weight: bold;
+  border-bottom: 2px solid rgb(146, 48, 48);
+}
+
+a:hover.active {
+  border-bottom: 2px solid rgb(184, 163, 163);
+}

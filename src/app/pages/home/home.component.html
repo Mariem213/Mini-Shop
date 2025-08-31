@@ -1,0 +1,44 @@
+<div class="container py-4">
+  <section class="container my-5">
+    <app-about></app-about>
+  </section>
+
+  <section class="my-5">
+    <h3 class="mb-5" style="font-size: 2rem;">Best Products</h3>
+    <div class="row g-3">
+      <div class="col-md-3" *ngFor="let p of featured">
+        <app-product-card [product]="p" (add)="onAdd($event)" (showDetails)="openDetails($event)">
+        </app-product-card>
+      </div>
+    </div>
+    <div class="m-auto text-center mt-5">
+      <button class="btn btn-dark" (click)="onSeeAll()">See all products</button>
+    </div>
+  </section>
+
+  <section class="container my-5">
+    <app-contact-us></app-contact-us>
+  </section>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="productModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedProduct?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedProduct">
+        <img *ngIf="selectedProduct.img" [src]="selectedProduct.img" class="img-fluid mb-3">
+        <p><strong>Price:</strong> \${{ selectedProduct.price }}</p>
+        <p><strong>Description:</strong> {{ selectedProduct.description }}</p>
+        <p *ngIf="selectedProduct.category"><strong>Category:</strong> {{ selectedProduct.category }}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="onAdd(selectedProduct!)">Add to Cart</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

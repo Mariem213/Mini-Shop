@@ -1,0 +1,21 @@
+.hero {
+  min-height: 50vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: url(../../../../public/assets/hero-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+
+.hero .content h3 {
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.hero .content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  padding: 1rem 0;
+}
